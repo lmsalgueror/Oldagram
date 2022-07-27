@@ -28,63 +28,62 @@ const posts = [{
 ]
 
 const infoContent = document.getElementById("info-content")
-let isLiked = false;
+const heartEl = document.getElementById("the-heart")
+const likesEl = document.querySelector("likes-el")
 
-posts.forEach(element =>
+let likesArray = []
+
+for (let i = 0; i < posts.length; i++) {
+    let userInfo = posts[i]
+    printScreen(userInfo)
+    likesArray.push(userInfo.likes)
+}
+
+function printScreen(element) {
     infoContent.innerHTML +=
-    `<section id="info-poster">
-    <div class="container">
-    <img src="${element.avatar}" class="poster-pic">
-    <div id="poster-text">
-        <h3 class="poster-user">${element.name}</h3>
-        <p class="poster-location">${element.location}</p>
-    </div>
-    </div>
-    </section>
-
-    <section id="photo-section">
-      <div class="container">
-        <img src="${element.post}" id="post-photo">
-      </div>
+        `<section id="info-poster">
+        <div class="container">
+        <img src="${element.avatar}" class="poster-pic">
+        <div id="poster-text">
+            <h3 class="poster-user">${element.name}</h3>
+            <p class="poster-location">${element.location}</p>
+        </div>
+        </div>
+        </section>
+    
+        <section id="photo-section">
+          <div class="container">
+            <img src="${element.post}" id="post-photo" class="photo-size">
+          </div>
+        </section>
+        
+        <section id="comment-section">
+        <div class="container">
+            <img src="images/icon-heart.png" class="icon" class="heart" id="the-heart">
+            <img src="images/icon-comment.png" class="icon">
+            <img src="images/icon-dm.png" class="icon">
+        </div>
     </section>
     
-    <section id="comment-section">
-    <div class="container">
-        <img src="images/icon-heart.png" class="icon" id="heart">
-        <img src="images/icon-comment.png" class="icon">
-        <img src="images/icon-dm.png" class="icon">
-    </div>
-</section>
+    <section id="likes">
+                <div class="container">
+                    <p class="likes-el">${element.likes} likes</p>
+                </div>
+            </section>
+    
+            <section id="title-comment">
+                <div class="container">
+                    <p class="comment">${element.username} <span class="lighter">${element.comment}</span> </p>
+                </div>
+            </section>
 
-<section id="likes">
-            <div class="container">
-                <p class="likes-el">${element.likes} likes</p>
-            </div>
-        </section>
+            
+        `
 
-        <section id="title-comment">
-            <div class="container">
-                <p class="comment">${element.username} <span class="lighter">${element.comment}</span> </p>
-            </div>
-        </section>
-    `)
+}
 
-const photoPost = document.getElementById("post-photo")
-const heartEl = document.getElementById("heart")
-
-photoPost.addEventListener("dblclick", function() {
-    alert("clicked")
-    element.likes += 1;
-})
-
-heartEl.addEventListener("dblclick", function() {
-    if (!isLiked) {
-        heartEl.style.opacity = "60%";
-        element.likes += 1;
-        isLiked = true;
-    } else if (isLiked) {
-        heartEl.style.opacity = "100%";
-        isLiked = false;
-    }
-
+document.querySelectorAll('.photo-size').forEach(item => {
+    item.addEventListener('dblclick', event => {
+        alert("clicked")
+    })
 })

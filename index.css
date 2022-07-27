@@ -101,7 +101,7 @@ h3 {
     border-radius: 50px;
 }
 
-#post-photo {
+.photo-size {
     width: 630px;
     padding: 0;
     margin: 0;
