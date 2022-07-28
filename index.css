@@ -63,7 +63,7 @@ h3 {
     padding-left: 15px;
 }
 
-.likes-el,
+.likesClass,
 .comment {
     font-weight: bold;
     text-align: justify;
@@ -88,11 +88,13 @@ h3 {
     height: 90px;
 }
 
-.icon {
+.icon,
+.heart-class {
     width: 35px;
 }
 
-.icon:hover {
+.icon:hover,
+.heart-class:hover {
     opacity: 50%;
 }
 

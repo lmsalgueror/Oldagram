@@ -28,15 +28,10 @@ const posts = [{
 ]
 
 const infoContent = document.getElementById("info-content")
-const heartEl = document.getElementById("the-heart")
-const likesEl = document.querySelector("likes-el")
-
-let likesArray = []
 
 for (let i = 0; i < posts.length; i++) {
     let userInfo = posts[i]
     printScreen(userInfo)
-    likesArray.push(userInfo.likes)
 }
 
 function printScreen(element) {
@@ -53,13 +48,13 @@ function printScreen(element) {
     
         <section id="photo-section">
           <div class="container">
-            <img src="${element.post}" id="post-photo" class="photo-size">
+            <img src="${element.post}" id="post-photo-${element.username}" class="photo-size">
           </div>
         </section>
         
         <section id="comment-section">
         <div class="container">
-            <img src="images/icon-heart.png" class="icon" class="heart" id="the-heart">
+            <img src="images/icon-heart.png" id="heart-${element.username}" class="heart-class">
             <img src="images/icon-comment.png" class="icon">
             <img src="images/icon-dm.png" class="icon">
         </div>
@@ -67,7 +62,7 @@ function printScreen(element) {
     
     <section id="likes">
                 <div class="container">
-                    <p class="likes-el">${element.likes} likes</p>
+                    <p class="likesClass"><span id="likes-el-${element.username}">${element.likes}</span> likes</p>
                 </div>
             </section>
     
@@ -84,6 +79,42 @@ function printScreen(element) {
 
 document.querySelectorAll('.photo-size').forEach(item => {
     item.addEventListener('dblclick', event => {
-        alert("clicked")
+        let actualPhotoId = item.id
+        let idphoto = " "
+
+        for (let i = 0; i < posts.length; i++) {
+            let user = posts[i].username
+            idphoto = "post-photo-" + user
+            const likesEl = document.getElementById("likes-el-" + user)
+            if (idphoto === actualPhotoId) {
+                likesEl.textContent = posts[i].likes += 1
+            }
+        }
+
+
+    })
+})
+
+document.querySelectorAll('.heart-class').forEach(item => {
+    item.addEventListener('dblclick', event => {
+        let actualHeart = item.id
+        let idheart = " "
+
+
+        for (let i = 0; i < posts.length; i++) {
+            let user = posts[i].username
+            idheart = "heart-" + user
+            const likesEl = document.getElementById("likes-el-" + user)
+            if (idheart === actualHeart) {
+                likesEl.textContent = posts[i].likes += 1
+                let heartEl = document.getElementById(idheart)
+                console.log(heartEl);
+                heartEl.style.opacity = "30%"
+            }
+
+
+        }
+
+
     })
 })
